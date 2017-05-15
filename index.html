@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Malaria DTK viewer</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="colorbrewer2.js"></script>
+    <link rel="stylesheet" type="text/css" href="dtk_survey.css" media="screen" />
+</head>
+<body>
+    <div class="bothcontainer">
+        <div class="containerheader">
+            <h1>Malaria Population Dynamics</h1>
+        </div>
+        <div class="resourcecontainer right">
+            <p id="date"></p>
+            <!---
+            <table>
+                <tr><td>Patient 0</td></tr>
+                <tr><td>Patient 1</td></tr>
+            </table>
+            -->
+        </div>
+        <div class="resourcecontainer left">
+            <p id="chart"></p>
+        </div>
+        <div class="containerfooter">
+            <p>Edward Wenger - <a href="http://www.idmod.org">Institute for Disease Modeling</a> - Intellectual Ventures<br />
+            Powered by <a href="http://d3js.org/">d3.js</a></p>
+        </div>
+    </div>
+    <script type="text/javascript" src="dtk_survey.js"></script>
+</body>
+</html>

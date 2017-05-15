@@ -1,0 +1,1 @@
+The dynamics of a malaria parasites in a human population over the course of year.  During the dry season, there are three campaigns of mass RDT screening and treatment with anti-malarials.

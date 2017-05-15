@@ -1,0 +1,102 @@
+body {
+    position: relative;
+    background: white;
+}
+
+.bothcontainer {
+    width: 960px;
+    margin: 0px auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: white;
+    /*border: 1px solid #efeeee;
+    box-shadow: 3px 3px 3px #efeeee;*/
+}
+
+.containerheader img {
+    float: left;
+    margin: 10px;
+}
+
+.containerheader h1 {
+    font-size: 24px;
+    padding: 0px 5px 20px;
+    float: left;
+    vertical-align: middle;
+}
+
+.containerfooter {
+    clear: left;
+}
+
+.containerfooter p {
+    color: gray;
+    font-size: x-small;
+    padding: 0px 10px;
+}
+
+a {
+    text-decoration: none;
+    color: darkred;
+    font-weight: bold;
+}
+
+a:hover {
+    color: firebrick;
+}
+
+.resourcecontainer.left {
+    clear:both;
+    top: 0;
+    width: 800px;
+    height: 700px;
+}
+
+.resourcecontainer.right {
+    float: left;
+    /*clear:both;*/
+    width: 360px;
+    top: 0;
+}
+
+/* Some stuff from Health & Wealth of Nations example*/
+
+#chart {
+  height: 506px;
+}
+
+#traces {
+  height: 150px;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.label {
+  fill: #777;
+}
+
+.year.label {
+  font: 500 70px "Helvetica Neue";
+  fill: #ddd;
+}
+
+.year.label.active {
+  fill: #aaa;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+  cursor: ew-resize;
+}
