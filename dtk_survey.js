@@ -1,7 +1,7 @@
 // TODO: access timesteps range from survey JSON?  in this case it is 365.
 
 // TODO: get day from input file name?  in this case it is Day830 where t=0 is Jan 1st, 2010.
-var DateZero = new Date(2010, 1, 1);
+var DateZero = new Date(2015, 1, 1);
 DateZero.setDate(DateZero.getDate() + 830);
 var dateFormat = d3.time.format("%d %b '%y");
 
@@ -19,12 +19,12 @@ function color(d) {
 }
 
 // Chart dimensions.
-var margin = {top: 10, right: 129.5, bottom: 19.5, left: 39.5},
-    width  = 800 - margin.right, //note dangling x-axis tick labels
-    height = 650 - margin.top - margin.bottom;
+var margin = {top: 24, right: 129.5, bottom: 25, left: 75},
+    width  = 650 - margin.right, //note dangling x-axis tick labels
+    height = 500 - margin.top - margin.bottom;
 
 // Various scales. These domains make assumptions of data, naturally.
-var xScale = d3.scale.log().clamp(true).domain([1e-3, 1e6]).range([0, width]).nice(),
+var xScale = d3.scale.log().clamp(true).domain([1e-3, 8e5]).range([0, width]),//.nice(),
     yScale = d3.scale.log().clamp(true).domain([1e-2, 1e4]).range([height, 0]).nice(),
     radiusScale = d3.scale.sqrt().domain([0, 1]).range([3, 8]);
 
@@ -47,7 +47,7 @@ var svg = d3.select("#chart").append("svg")
 // Create the SVG container for the date counter
 var svgdate = d3.select("#date").append("svg")
     .attr("width", 360)
-    .attr("height", 150)
+    .attr("height", 75)
   .append("g");
 
 // Add the x-axis.
@@ -82,7 +82,7 @@ svg.append("text")
 var label = svgdate.append("text")
     .attr("class", "year label")
     .attr("text-anchor", "end")
-    .attr("y", 150-24)
+    .attr("y", 75-24)
     .attr("x", 360)
     .text(dateFormat(DateZero));
 
@@ -90,19 +90,29 @@ var label = svgdate.append("text")
 d3.json("MalariaSurveyJSONAnalyzer_Day830_0.json", function (survey) {
 
     // Add a dot per nation. Initialize the data at t=0, and set the colors.
-    var dot = svg.append("g")
-        .attr("class", "dots")
-      .selectAll(".dot")
+    var shapes = svg.append("g")
+        .attr("class", "shapes")
+      .selectAll(".shape")
         .data(interpolateData(0))
-      .enter().append("circle")
-        .attr("class", "dot")
+      .enter()
+
+    .append("circle")
+        // .filter(function(d){ return d.age > 5})
+        .attr("class", "shape")
         .style("fill", function (d) { return colorScale(color(d)); })
         .style("opacity", 0.5)
-        .call(position)
+
+    // .append("rect")
+    //     .filter(function(d){ return d.age <= 5})
+    //     .attr("class", "shape")
+    //     .style("fill", function (d) { return colorScale(color(d)); })
+    //     .style("opacity", 0.5)
+
+    .call(position)
         .sort(order);
 
     // Add a title.
-    dot.append("title")
+    shapes.append("title")
         .text(function(d) { return d.name; });
 
     // Add an overlay for the year label.
@@ -123,10 +133,19 @@ d3.json("MalariaSurveyJSONAnalyzer_Day830_0.json", function (survey) {
         .each("end", enableInteraction);
 
     // Positions the dots based on data.
-    function position(dot) {
-        dot .attr("cx", function(d) { return xScale(x(d)); })
+    function position(shape) {
+
+        // if circle
+        shape.attr("cx", function(d) { return xScale(x(d)); })
             .attr("cy", function(d) { return yScale(y(d)); })
             .attr("r", function (d) { return radiusScale(radius(d)); })
+
+            // if rect
+            .attr("x", function(d) { return xScale(x(d)); })
+            .attr("y", function(d) { return yScale(y(d)); })
+            .attr("height", function (d) { return radiusScale(radius(d)); })
+            .attr("width", function (d) { return radiusScale(radius(d)); })
+
             .style("fill", function (d) { return colorScale(color(d)); });
     }
 
@@ -175,7 +194,7 @@ d3.json("MalariaSurveyJSONAnalyzer_Day830_0.json", function (survey) {
 
     // Updates the display to show the specified year.
     function displayYear(year) {
-        dot.data(interpolateData(year), key).call(position).sort(order);
+        shapes.data(interpolateData(year), key).call(position).sort(order);
         var tmpDate = new Date(DateZero.getTime());
         tmpDate.setDate(tmpDate.getDate() + year);
         label.text(dateFormat(tmpDate));

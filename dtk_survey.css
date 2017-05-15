@@ -5,7 +5,7 @@ body {
 
 .bothcontainer {
     width: 960px;
-    margin: 0px auto;
+    /*margin: 0px auto;*/
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: white;
     /*border: 1px solid #efeeee;
@@ -36,19 +36,19 @@ body {
 
 a {
     text-decoration: none;
-    color: darkred;
+    color: #0073a3;
     font-weight: bold;
 }
 
 a:hover {
-    color: firebrick;
+    color: #0073a3;
 }
 
 .resourcecontainer.left {
     clear:both;
     top: 0;
-    width: 800px;
-    height: 700px;
+    width: 650px;
+    height: 500px;
 }
 
 .resourcecontainer.right {
@@ -69,10 +69,10 @@ a:hover {
 }
 
 text {
-  font: 10px sans-serif;
+  font: 15px sans-serif;
 }
 
-.dot {
+.shape {
   stroke: #000;
 }
 
@@ -87,7 +87,7 @@ text {
 }
 
 .year.label {
-  font: 500 70px "Helvetica Neue";
+  font: 500 50px "Helvetica Neue";
   fill: #ddd;
 }
 
