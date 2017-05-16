@@ -1,10 +1,15 @@
+import os
+
 from dtk.utils.core.DTKConfigBuilder import DTKConfigBuilder
 from simtools.ModBuilder import ModBuilder, ModFn
 
 from dtk.vector.input_EIR_by_site import configure_site_EIR
 from dtk.utils.reports.MalariaReport import add_survey_report
+
 from dtk.interventions.health_seeking import add_health_seeking
 from dtk.interventions.malaria_drug_campaigns import add_drug_campaign
+
+from dtk.utils.analyzers.DownloadAnalyzer import DownloadAnalyzer
 
 
 exp_name = 'Parasite Population Surveys'
@@ -74,4 +79,17 @@ run_sim_args = {'config_builder': cb,
 Analyzer to simply copy all survey-report JSON down from all simulations
 """
 
-analyzers = []
+
+class MyDownloadAnalyzer(DownloadAnalyzer):
+
+    def __init__(self):
+        super(MyDownloadAnalyzer, self).__init__(
+            output_path='output',
+            filenames=['output/MalariaSurveyJSONAnalyzer_Day_%d_0.json' % survey_day])
+
+    def get_sim_folder(self, parser):
+        """ Use simulation name if possible, otherwise default to less informative unique ID """
+        return os.path.join(self.output_path, parser.sim_data.get('Config_Name', parser.sim_id))
+
+
+analyzers = [MyDownloadAnalyzer()]
