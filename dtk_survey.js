@@ -2,7 +2,7 @@
 
 // TODO: get day from input file name?  in this case it is Day830 where t=0 is Jan 1st, 2010.
 var DateZero = new Date(2015, 1, 1);
-DateZero.setDate(DateZero.getDate() + 830);
+DateZero.setDate(DateZero.getDate() + 645);
 var dateFormat = d3.time.format("%d %b '%y");
 
 // Various accessors that specify the four dimensions of data to visualize.
@@ -87,7 +87,7 @@ var label = svgdate.append("text")
     .text(dateFormat(DateZero));
 
 // Load the data.
-d3.json("MalariaSurveyJSONAnalyzer_Day830_0.json", function (survey) {
+d3.json("MalariaSurveyJSONAnalyzer_Day_645_0.json", function (survey) {
 
     // Add a dot per nation. Initialize the data at t=0, and set the colors.
     var shapes = svg.append("g")
