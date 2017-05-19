@@ -87,7 +87,10 @@ var label = svgdate.append("text")
     .text(dateFormat(DateZero));
 
 // Load the data.
-var scenario = 'perfect_MSAT';
+//var scenario = 'perfect_MSAT';
+//var scenario = 'perfect_health_seeking';
+var scenario = 'baseline';
+
 d3.json("dtk/output/" + scenario + "/MalariaSurveyJSONAnalyzer_Day_645_0.json", function (survey) {
 
     // Add a dot per nation. Initialize the data at t=0, and set the colors.
